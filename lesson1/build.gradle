@@ -1,0 +1,24 @@
+task hello1 << {
+	println "Sanket-Pargaonkar"
+}
+
+//Although this might look like java syntax, this is actually grovy syntax.
+class Sample{
+		public void printline(){
+			System.out.println("This is the line printed by the method.");	
+		}
+}
+Sample s = new Sample();
+s.printline();
+//This line is executed just like a line in an an program fed to an interpreter in an interpreted language.
+println "This line is outside the {} brackets."
+
+//You can insert code into a println string using the unix like '${}' syntax.
+println "5 + 7 is ${5+7}"
+
+//The variables in groovy are optionally typed. You can declare a variable without any type using the 'def' keyword.
+def foo = 630.25
+//This variable has no type.
+// The type of an variable can be printed using the <var_name>.class
+println "The type of foo is ${foo.class}"
+
