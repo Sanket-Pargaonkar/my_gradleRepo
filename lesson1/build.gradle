@@ -21,4 +21,60 @@ def foo = 630.25
 //This variable has no type.
 // The type of an variable can be printed using the <var_name>.class
 println "The type of foo is ${foo.class}"
+// The variable can be outputed from println using the $<var_name> syntax.
+println "The value of foo is $foo"
+//Since the gradle allows variables without any type we can assign a string value to the foo variable.
+foo = "This is foo var"
+println "The foo var is now of type:${foo.class} and value is '$foo'"
 
+//FUNCTION IN GROOVY:
+// The functions in groovy are defined as follows. The last statement of the function us returned as value.
+def doubleNum(n){
+	n*2
+}
+def doubleNumStr(n){
+	n+n // Since + operator is overloaded in groovy as in java, this function will accept strings as well.
+}
+// Testing these functions using the ${} and $ syntax
+foo = 11
+println "doubleNum(foo): ${doubleNum(foo)}"
+foo = "String Foo "
+println "doubleNumStr(foo):${doubleNumStr(foo)}  doubleNum(foo): ${doubleNum(foo)} "
+// The * operator also accepts string and prints it twice. So we will write a fuction that divides the input by 10.
+/*
+ *This does not work. This gives error saying  No signature of method: java.lang.String.div() is applicable for argument types:
+ *	(java.lang.Integer) values: [10].Possible solutions: is(java.lang.Object), drop(int), wait(), trim(), size(), find()
+ *def decdiv(n){
+ *  n/10
+ *}
+ *println "decdiv(foo): ${decdiv(foo)}"
+ */
+
+ // Another cool feature of the functions in groovy is that the functions can be invoked without the use of parantheses when the call is unabigious.
+ // However the function with no arguments has to be called using the parantheses. They cannot be left out here.
+ // This feature has a few catches though. they all revolve around the fact that the invokation must be unambigious.
+// Setting up a few functions with different number of arguments:
+def fun_no(){
+	println "This is the noargs function."
+}
+def fun_one(c){
+	println "This is one argument function."
+	c
+}
+def fun_two(a,d){
+	println "This is two args function."
+	a+d
+}
+
+println "${fun_one 100}"
+println "${fun_two 10,29}"//Note however, that the multiple args must still be seperated by ','
+/*
+ * //This gives error.
+ *println "${fun_no}"
+ */
+println "${fun_no()}"//This works.
+/*
+ *This call is an example of ambigious calls:
+ *println "${fun_two fun_one 200,100}"
+ */
+println "${fun_two fun_one(200),100}"// This is how you make it unambigious, buy adding paranthesis.

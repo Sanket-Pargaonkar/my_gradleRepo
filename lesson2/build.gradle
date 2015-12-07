@@ -1,0 +1,70 @@
+task groovyl2 << {
+	println "This is groovyl2 task written by Sanket-Pargaonkar."
+}
+
+//CLOSURES IN GROOVY:
+/*
+ *In groovy closures are fuctions that can be:
+ *  1. Packaged and passed around in the program.
+ *  2. Assigned to variables.
+ *  3. Closures retain scope of the variables.
+ */
+// The following code demonstrates the syntax of closures in groovy and the usage of closure.
+// This is the syntax for declaring closure:
+def myFunc(){//Syntax for defining the function is like that of java.
+
+}
+def foo = "Closure variable"
+def myClosure = {
+	println "This is a closure. Value of foo: $foo"
+}
+myClosure()
+def bar = myClosure//2. Assigning the closure to variables.
+bar()
+foo = "Closure Variable Changed."
+def baz = bar//1. Packageing and passing the closure around.
+baz()//3. This should reflect the changed value.
+
+// The syntax for declaring arguments in closures of groovy is given below:
+def doubleit = { x -> x+x }
+
+// Groovy allows for higher order fuctions.
+def applytwice(func, args){
+	func(func(args))
+}
+println "The output of apply twice fuction with closure being passed as function and 10 passed as args: ${applytwice(doubleit, 10)}"
+
+//LISTS AND OPERATIONS ON LISTS;
+def list1 = ["item1", "item2", "item3"]
+list1.each({x -> println "$x"})
+list1.each {x -> println "Ha ha!"}// This is groovy's syntactic sugar similler to the one mentioned during the explanation of functions.
+list1.each {println "$it"} //Syntactic sugar: When a closure takesonly one argument then the argument by default is called "it"
+
+//CLASSES IN GROOVY:
+/*
+ *The classes in groovy can be declaredsimmilerto that of java because they are java classes under the hood.
+ *Groovy creates setters and getters for all the member variables. This is how you reassign values to the variables under the hood.
+ */
+class GroovyGreeter{
+	def greeting = "Hello"
+	def printGreeting(){
+		println "Value of greeting: $greeting"
+	}
+}
+GroovyGreeter gg = new GroovyGreeter()
+gg.printGreeting()
+gg.greeting = "Aloha!"//This uses the setters and getters under the hood.
+gg.printGreeting()
+
+//CLOSURES IN CLASSES IN GROOVY
+/*
+ *You can delage the scope of the closure to a particular class.
+ *This way the scope of he variables in the class come under the scope of the closure.
+ */
+def greetClosure = {
+	greeting = "Namaste!"
+	println "The value of the greeting changed in closure: $greeting."
+}
+
+greetClosure.delegate = GroovyGreeter
+greetClosure()
